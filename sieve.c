@@ -177,7 +177,6 @@ int main(int NumberOfArgs, char** Args) {
     if (ShouldPrintPrimes) {
         PrintPrimes(IsComposite);
     }
-    
 
     return EXIT_SUCCESS;
 }
@@ -191,9 +190,16 @@ void PrintPrimes(b8* IsComposite) {
                 printf("%" PrintSieveNum "%s", Number, LocalSeparator);
             }
     }
-        
-    // Append empty line if missing  
+
+    //
+    // NOTE: If last row is not complete, remove trailing separator and
+    //       append a new line.
+    //
+    size_t SeparatorLength = strlen(Separator);
     if(PrimeInLine > 0) {
+        for(u32 SepIndex = 0; SepIndex < SeparatorLength; SepIndex++) {
+            printf("\b \b");
+        }
         printf("\n");
     }
 }
